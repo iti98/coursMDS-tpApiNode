@@ -1,0 +1,19 @@
+{
+  "name": "coursmds-tpapinode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iti98/coursMDS-tpApiNode.git"
+  },
+  "author": "Etienne TORGUE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iti98/coursMDS-tpApiNode/issues"
+  },
+  "homepage": "https://github.com/iti98/coursMDS-tpApiNode#readme"
+}
