@@ -1,5 +1,5 @@
-const User = require('../models/userModel');
 const jwt = require("jsonwebtoken");
+const User = require('../models/userModel');
 
 userRegister = (req, res) => {
     let newUser = new User(req.body);
@@ -15,15 +15,13 @@ userRegister = (req, res) => {
             res.json({ message: `Utilisateur crée : ${user.email}` });
         }
     })
-
-
 }
 
 loginRegister = (req, res) => {
     // Find user
     User.findOne({ email: req.body.email }, (error, user) => {
-        // If user not found
         if (error) {
+            // User not found
             res.status(500);
             console.log(error);
             res.json({ message: "Utilisateur non trouvé" });
@@ -38,23 +36,22 @@ loginRegister = (req, res) => {
                     role: "admin"
                 }
                 jwt.sign(userData, process.env.JWT_KEY, { expiresIn: "30 days" }, (error, token) => {
-                    if(error) {
-                        res.status(500);
+                    if (error) {
+                        res.status(500)
+                            .json({ message: "Impossible de générer le token" });
                         console.log(error);
-                        res.json({message: "Impossible de générer le token"});
-
                     }
                     else {
-                        res.status(200);
-                        res.json({token});
+                        res.status(200)
+                            .json({ token });
                     }
                 })
             }
             else {
                 // Password don't match
-                res.status(401);
+                res.status(401)
+                    .json({ message: "Email ou Mot de passe incorrect" });
                 console.log(error);
-                res.json({ message: "Email ou Mot de passe incorrect" });
 
             }
         }

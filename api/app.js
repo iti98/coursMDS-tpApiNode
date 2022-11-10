@@ -1,20 +1,24 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config();
+var cors = require('cors');
 
-const postRoute = require("./api/routes/postRoute");
-const commentRoute = require("./api/routes/commentRoute");
-const userRoute = require("./api/routes/userRoute");
+const postRoute = require("./src/routes/postRoute");
+const commentRoute = require("./src/routes/commentRoute");
+const userRoute = require("./src/routes/userRoute");
 
 const hostname = '0.0.0.0';
 const port = 3000;
 
 const server = express();
 
-mongoose.connect('mongodb://localhost:27017/apinodetp'); // Sans docker
+mongoose.connect(process.env.MongoDB + '/apinodetp'); // Sans docker
 // mongoose.connect('mongodb://mongo/nodeapi'); // Avec docker
 
 server.use(express.urlencoded());
 server.use(express.json());
+
+server.use(cors()); // For dev purpose only
 
 postRoute(server);
 commentRoute(server);
