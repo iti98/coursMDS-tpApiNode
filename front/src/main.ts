@@ -1,11 +1,27 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import App from './App.vue'
+import { createApp } from 'vue';
+import './tailwind.scss';
+import App from './App.vue';
+import { createRouter, createWebHistory } from 'vue-router/auto';
+import { createHead } from '@vueuse/head';
 
-import './assets/main.css'
 
-const app = createApp(App)
 
-app.use(createPinia())
+const app = createApp(App);
+const head = createHead();
 
-app.mount('#app')
+const router = createRouter({
+  history: createWebHistory(),
+  scrollBehavior(to, from, savedPosition) {
+    // always scroll to top
+    return { 
+      top: 0,
+      behavior: 'auto' 
+    }
+  }
+});
+
+
+
+app.use(router);
+app.use(head);
+app.mount(document.body);
